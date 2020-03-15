@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="text-center text-info">Posts page</h1>
+    <a href="{{url_for('postCreate')}}" class="btn btn-primary btn-sm">Create</a>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">Title</th>
+                <th scope="col">Content</th>
+                <th scope="col">Image</th>
+                <th scope="col">Since</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for post in context.posts %}
+            <tr>
+                <td>{{post.id}}</td>
+                <td>{{post.title}}</td>
+                <td>{{post.content}}</td>
+                <td><img src="{{url_for('static',filename='imgs/'+post.image)}}" alt=""></td>
+                <td>{{post.created_at}}</td>
+                <td>
+                    <a href="{{url_for('catEdit',id=post.id)}}" class="btn btn-warning">Edit</a>
+                    <a href="{{url_for('catDelete',id=post.id)}}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
